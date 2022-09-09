@@ -16,6 +16,23 @@ void get_URL(const string &host, const string &path) {
     // Then you'll need to print out everything the server sends back,
     // (not just one call to read() -- everything) until you reach
     // the "eof" (end of file).
+    /*
+    您将需要连接到计算机上的“http”服务，其名称在“host”字符串中，然后请求在“path”字符串中给出的URL路径。
+    然后，您需要打印服务器返回的所有内容(不仅仅是一个read()调用——所有内容)，直到到达“eof”(文件结束)。
+    */
+    TCPSocket http_tcp;
+    http_tcp.connect(Address(host, "http"));
+    http_tcp.write("GET " + path + " HTTP/1.1\r\n");
+    http_tcp.write("Host: " + host + "\r\n");
+    http_tcp.write("Connection: close\r\n");
+    http_tcp.write("\r\n");
+
+    while (
+        !http_tcp.eof()) {  //除非获取到EOF，否则必须循环从远程服务器读取信息。因为网络数据的传输可能断断续续，需要多次
+                            // read。
+        cout << http_tcp.read();
+    }
+    http_tcp.close();
 
     cerr << "Function called: get_URL(" << host << ", " << path << ").\n";
     cerr << "Warning: get_URL() has not been implemented yet.\n";
