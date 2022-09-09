@@ -1,13 +1,16 @@
 #ifndef SPONGE_LIBSPONGE_BYTE_STREAM_HH
 #define SPONGE_LIBSPONGE_BYTE_STREAM_HH
 
+#include <deque>
 #include <string>
 
 //! \brief An in-order byte stream.
 
 //! Bytes are written on the "input" side and read from the "output"
+//  字节被写入“输入”端，并从“输出”端读取。
 //! side.  The byte stream is finite: the writer can end the input,
 //! and then no more bytes can be written.
+//  字节流是有限的:写入器可以结束输入，然后不能再写入字节。
 class ByteStream {
   private:
     // Your code here -- add private members as necessary.
@@ -16,6 +19,15 @@ class ByteStream {
     // all, but if any of your tests are taking longer than a second,
     // that's a sign that you probably want to keep exploring
     // different approaches.
+    /*
+    这根本不需要是复杂的数据结构，但如果任何测试花费的时间超过一秒，
+    这表明您可能想要继续探索不同的方法。
+    */
+    std::deque<char> deque_;
+    size_t capacity_size_;  //缓冲区的大小
+    size_t written_size_;   //要写入的大小
+    size_t read_size_;      //要读出去的大小
+    bool end_input_;
 
     bool _error{};  //!< Flag indicating that the stream suffered an error.
 
