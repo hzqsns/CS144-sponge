@@ -9,8 +9,8 @@
 // For Lab 3, please replace with a real implementation that passes the
 // automated checks run by `make check_lab3`.
 
-template <typename... Targs>
-void DUMMY_CODE(Targs &&... /* unused */) {}
+// template <typename... Targs>
+// void DUMMY_CODE(Targs &&... /* unused */) {}
 
 using namespace std;
 
@@ -24,15 +24,26 @@ TCPSender::TCPSender(const size_t capacity, const uint16_t retx_timeout, const s
 
 uint64_t TCPSender::bytes_in_flight() const { return {}; }
 
+//! \brief create and send segments to fill as much of the window as possible
+//         创建和发送段以尽可能多地填充窗口
 void TCPSender::fill_window() {}
 
 //! \param ackno The remote receiver's ackno (acknowledgment number)
+//               远程接收者的ackno(确认号)
 //! \param window_size The remote receiver's advertised window size
-void TCPSender::ack_received(const WrappingInt32 ackno, const uint16_t window_size) { DUMMY_CODE(ackno, window_size); }
+//                     远程接收者的通告窗口大小
+void TCPSender::ack_received(const WrappingInt32 ackno, const uint16_t window_size) {
+    // DUMMY_CODE(ackno, window_size);
+}
 
 //! \param[in] ms_since_last_tick the number of milliseconds since the last call to this method
-void TCPSender::tick(const size_t ms_since_last_tick) { DUMMY_CODE(ms_since_last_tick); }
+//                                自最后一次调用此方法以来的毫秒数
+void TCPSender::tick(const size_t ms_since_last_tick) {
+    // DUMMY_CODE(ms_since_last_tick);
+}
 
 unsigned int TCPSender::consecutive_retransmissions() const { return {}; }
 
+//! \brief Generate an empty-payload segment (useful for creating empty ACK segments)
+//         生成空的有效负载段(用于创建空的ACK段)
 void TCPSender::send_empty_segment() {}

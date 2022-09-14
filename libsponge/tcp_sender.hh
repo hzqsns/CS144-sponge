@@ -21,15 +21,19 @@ class TCPSender {
     WrappingInt32 _isn;
 
     //! outbound queue of segments that the TCPSender wants sent
+    //  TCPSender想要发送的段的出站队列
     std::queue<TCPSegment> _segments_out{};
 
     //! retransmission timer for the connection
+    //  连接的重传计时器
     unsigned int _initial_retransmission_timeout;
 
     //! outgoing stream of bytes that have not yet been sent
+    //  尚未发送的传出字节流
     ByteStream _stream;
 
     //! the (absolute) sequence number for the next byte to be sent
+    //  要发送的下一个字节的(绝对)序列号
     uint64_t _next_seqno{0};
 
   public:
@@ -51,12 +55,15 @@ class TCPSender {
     void ack_received(const WrappingInt32 ackno, const uint16_t window_size);
 
     //! \brief Generate an empty-payload segment (useful for creating empty ACK segments)
+    //         生成空的有效负载段(用于创建空的ACK段)
     void send_empty_segment();
 
     //! \brief create and send segments to fill as much of the window as possible
+    //         创建和发送段以尽可能多地填充窗口
     void fill_window();
 
     //! \brief Notifies the TCPSender of the passage of time
+    //         通知TCPSender时间的流逝
     void tick(const size_t ms_since_last_tick);
     //!@}
 
